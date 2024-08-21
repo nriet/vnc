@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IDEA_VER_DATE="2023.3.3"
+IDEA_VER_DATE="2023.3.3-aarch64"
 
 cd /tmp
 wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER_DATE}.tar.gz"
