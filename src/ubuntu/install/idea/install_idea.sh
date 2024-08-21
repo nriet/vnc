@@ -11,7 +11,7 @@ fi
 cd /tmp
 wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER_DATE}.tar.gz"
 
-tar -xzf idea.tar.gz -C /tmp
+tar -xzf idea.tar.gz -C /opt
 
 mv /opt/idea-* /opt/idea
 
