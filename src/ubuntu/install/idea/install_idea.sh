@@ -8,10 +8,10 @@ if [ "$ARCH" == "arm64" ] ; then
 fi	
  echo $IDEA_VER_DATE
 
-cd /opt
+cd /tmp
 wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER_DATE}.tar.gz"
 
-tar -xzf idea.tar.gz -C /opt
+tar -xzf idea.tar.gz -C /tmp
 
 mv /opt/idea-* /opt/idea
 
@@ -26,4 +26,4 @@ chmod +x /opt/jetbra/scripts/*.sh
 
 ./opt/jetbra/scripts/install.sh
 
-#rm -rf /tmp/idea.tar.gz
+rm -rf /tmp/idea.tar.gz
