@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Idea IDE
+GenericName=IDE
+Comment=Sophisticated text editor for code, markup and prose
+Exec=/opt/idea/bin/idea.sh
+Terminal=false
+MimeType=text/plain;
+Icon=idea.png
+Categories=Development;IDE;
+StartupNotify=true
