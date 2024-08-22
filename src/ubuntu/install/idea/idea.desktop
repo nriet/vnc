@@ -7,6 +7,6 @@ Comment=Sophisticated text editor for code, markup and prose
 Exec=/opt/idea/bin/idea.sh
 Terminal=false
 MimeType=text/plain;
-Icon=idea.png
+Icon=/opt/idea/bin/idea.png
 Categories=Development;IDE;
 StartupNotify=true

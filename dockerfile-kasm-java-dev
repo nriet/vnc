@@ -4,7 +4,7 @@ FROM kasmweb/$BASE_IMAGE:$BASE_TAG
 
 USER root
 
-ENV HOME /home/kasm-default-profile
+ENV HOME /home/nriet
 ENV STARTUPDIR /dockerstartup
 WORKDIR $HOME
 
@@ -32,8 +32,8 @@ COPY ./src/ubuntu/install/firefox/firefox.desktop $HOME/Desktop/
 RUN bash $INST_SCRIPTS/firefox/install_firefox.sh && rm -rf $INST_SCRIPTS/firefox/
 
 ### Install Sublime Text
-COPY ./src/ubuntu/install/sublime_text $INST_SCRIPTS/sublime_text/
-RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCRIPTS/sublime_text/
+# COPY ./src/ubuntu/install/sublime_text $INST_SCRIPTS/sublime_text/
+# RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCRIPTS/sublime_text/
 
 ### Install Visual Studio Code
 # COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
@@ -64,10 +64,12 @@ RUN $STARTUPDIR/set_user_permission.sh $HOME
 
 RUN chown 1000:0 $HOME
 
-ENV HOME /home/kasm-user
-WORKDIR $HOME
+#ENV HOME /home/nriet
+#WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
 USER 1000
+
+RUN $HOME/jetbra/scripts/install.sh
 
 CMD ["--tail-log"]
