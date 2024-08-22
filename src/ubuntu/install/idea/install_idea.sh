@@ -1,5 +1,9 @@
 #!/bin/bash
 
+usermod -l nriet kasm-user
+sed -i 's/kasm-user/nriet/g' /etc/passwd
+sed -i 's/kasm-user/nriet/g' /etc/shadow
+
 IDEA_VER_DATE="2023.3.3"
 
 ARCH=$(arch | sed 's/aarch64/arm64/g' | sed 's/x86_64/amd64/g')
