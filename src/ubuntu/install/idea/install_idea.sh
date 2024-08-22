@@ -10,17 +10,16 @@ fi
 
 cd /tmp
 
-# wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER_DATE}.tar.gz"
-# tar -xzf idea.tar.gz -C /opt
-# mv /opt/idea-* /opt/idea
+wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER_DATE}.tar.gz"
+tar -xzf idea.tar.gz -C /opt
+mv /opt/idea-* /opt/idea
 
-cp $INST_SCRIPTS/idea/idea.desktop $HOME/Desktop/
 cp $INST_SCRIPTS/idea/idea.desktop /usr/share/applications/
 
-cp $INST_SCRIPTS/idea/jetbra $HOME/jetbra
+cp -r $INST_SCRIPTS/idea/jetbra/ $HOME/
 
-#chmod +x $HOME/jetbra/scripts/*.sh
+chmod +x $HOME/jetbra/scripts/*.sh
 
 # ./opt/jetbra/scripts/install.sh
 
-#rm -rf /tmp/idea.tar.gz
+rm -rf /tmp/idea.tar.gz
