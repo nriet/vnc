@@ -17,7 +17,7 @@ cd /tmp
 cp $INST_SCRIPTS/idea/idea.desktop $HOME/Desktop/
 cp $INST_SCRIPTS/idea/idea.desktop /usr/share/applications/
 
-cp $INST_SCRIPTS/idea/jetbra $HOME
+cp $INST_SCRIPTS/idea/jetbra $HOME/jetbra
 
 chmod +x $HOME/jetbra/scripts/*.sh
 
