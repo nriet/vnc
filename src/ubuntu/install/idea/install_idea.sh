@@ -19,7 +19,7 @@ cp $INST_SCRIPTS/idea/idea.desktop /usr/share/applications/
 
 cp $INST_SCRIPTS/idea/jetbra $HOME/jetbra
 
-chmod +x $HOME/jetbra/scripts/*.sh
+#chmod +x $HOME/jetbra/scripts/*.sh
 
 # ./opt/jetbra/scripts/install.sh
 
