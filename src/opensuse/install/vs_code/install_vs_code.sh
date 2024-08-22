@@ -15,6 +15,4 @@ chown 1000:1000 $HOME/Desktop/code.desktop
 
 # Conveniences for python development
 zypper install -yn python3-setuptools python3-virtualenv
-if [ -z ${SKIP_CLEAN+x} ]; then
-  zypper clean --all
-fi
+zypper clean --all

@@ -10,9 +10,7 @@ fi
 
 if [ "${DISTRO}" == "oracle8" ]; then
   dnf install -y xz
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    dnf clean all
-  fi
+  dnf clean all
 fi
 
 wget -q https://telegram.org/dl/desktop/linux -O /tmp/telegram.tgz

@@ -11,19 +11,13 @@ fi
 if [[ "${DISTRO}" == @(oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8) ]]; then
   dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
   dnf install -y terraform
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    dnf clean all
-  fi
-elif [[ "${DISTRO}" == @(fedora37|fedora38|fedora39|fedora40) ]]; then
+  dnf clean all
+elif [ "${DISTRO}" == "fedora37" ]; then
   dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
   dnf install -y terraform
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    dnf clean all
-  fi
+  dnf clean all
 else
   yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
   yum install -y terraform
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    yum clean all
-  fi
+  yum clean all
 fi

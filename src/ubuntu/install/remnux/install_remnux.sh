@@ -1,13 +1,5 @@
 #!/bin/bash
-set -x
-
-
-# Install Salt
-wget -nv -O - https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg | apt-key add -
-echo deb [arch=amd64] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/3004 focal main > /etc/apt/sources.list.d/saltstack.list
-apt-get update
-apt-get install -y salt-common 
-git clone https://github.com/REMnux/salt-states.git /srv/salt
+set -ex
 
 # Install remnux tools
 export HOME=/root
@@ -22,12 +14,8 @@ apt-get purge -y \
 rm -f /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
 rm -rf \
   /root \
+  /var/lib/apt/lists/* \
+  /var/tmp/* \
   /tmp/*
 mkdir /root
 export HOME=/home/kasm-default-profile
-if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
-fi

@@ -4,37 +4,20 @@ set -ex
 CHROME_ARGS="--password-store=basic --no-sandbox  --ignore-gpu-blocklist --user-data-dir --no-first-run --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT'"
 ARCH=$(arch | sed 's/aarch64/arm64/g' | sed 's/x86_64/amd64/g')
 
-if [[ "${DISTRO}" == @(debian|opensuse|ubuntu) ]] && [ ${ARCH} = 'amd64' ] && [ ! -z ${SKIP_CLEAN+x} ]; then
-  echo "not installing chromium on x86_64 desktop build"
-  exit 0
-fi
-
-if [[ "${DISTRO}" == @(centos|oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|fedora37|fedora38|fedora39|fedora40) ]]; then
-  if [[ "${DISTRO}" == @(oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|fedora37|fedora38|fedora39|fedora40) ]]; then
+if [[ "${DISTRO}" == @(centos|oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|fedora37) ]]; then
+  if [[ "${DISTRO}" == @(oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|fedora37) ]]; then
     dnf install -y chromium
-    if [ -z ${SKIP_CLEAN+x} ]; then
-      dnf clean all
-    fi
+    dnf clean all
   else
     yum install -y chromium
-    if [ -z ${SKIP_CLEAN+x} ]; then
-      yum clean all
-    fi
+    yum clean all
   fi
 elif [ "${DISTRO}" == "opensuse" ]; then
   zypper install -yn chromium
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    zypper clean --all
-  fi
+  zypper clean --all
 elif grep -q "ID=debian" /etc/os-release || grep -q "ID=kali" /etc/os-release || grep -q "ID=parrot" /etc/os-release; then
   apt-get update
   apt-get install -y chromium
-  if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
-  fi
 else
   apt-get update
   apt-get install -y software-properties-common ttf-mscorefonts-installer
@@ -44,7 +27,7 @@ else
   # currently compatible with docker containers. The new install will pull
   # deb files from archive.ubuntu.com for ubuntu 18.04 and install them.
   # This will work until 18.04 goes to an unsupported status.
-  if [ ${ARCH} = 'amd64' ] ;
+  if [[ ${ARCH} == "amd64" ]] ;
   then
     chrome_url="http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/"
   else
@@ -79,12 +62,6 @@ else
 
   rm "${chromium_codecs_data}"
   rm "${chromium_data}"
-  if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
-  fi
 fi
 
 if grep -q "ID=debian" /etc/os-release || grep -q "ID=kali" /etc/os-release || grep -q "ID=parrot" /etc/os-release; then
@@ -105,9 +82,6 @@ fi
 mv /usr/bin/${REAL_BIN} /usr/bin/${REAL_BIN}-orig
 cat >/usr/bin/${REAL_BIN} <<EOL
 #!/usr/bin/env bash
-if ! pgrep chromium > /dev/null;then
-  rm -f \$HOME/.config/chromium/Singleton*
-fi
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/Default/Preferences
 sed -i 's/"exit_type":"Crashed"/"exit_type":"None"/' ~/.config/chromium/Default/Preferences
 if [ -f /opt/VirtualGL/bin/vglrun ] && [ ! -z "\${KASM_EGL_CARD}" ] && [ ! -z "\${KASM_RENDERD}" ] && [ -O "\${KASM_RENDERD}" ] && [ -O "\${KASM_EGL_CARD}" ] ; then
@@ -124,7 +98,7 @@ if [ "${DISTRO}" != "opensuse" ] && ! grep -q "ID=debian" /etc/os-release && ! g
   cp /usr/bin/chromium-browser /usr/bin/chromium
 fi
 
-if [[ "${DISTRO}" == @(centos|oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|opensuse|fedora37|fedora38|fedora39|fedora40) ]]; then
+if [[ "${DISTRO}" == @(centos|oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|opensuse|fedora37) ]]; then
   cat >> $HOME/.config/mimeapps.list <<EOF
     [Default Applications]
     x-scheme-handler/http=${REAL_BIN}.desktop
@@ -150,7 +124,3 @@ mkdir -p /etc/chromium/policies/managed/
 cat >>/etc/chromium/policies/managed/default_managed_policy.json <<EOL
 {"CommandLineFlagSecurityWarningsEnabled": false, "DefaultBrowserSettingEnabled": false}
 EOL
-
-# Cleanup for app layer
-chown -R 1000:0 $HOME
-find /usr/share/ -name "icon-theme.cache" -exec rm -f {} \;

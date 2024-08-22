@@ -21,7 +21,6 @@ set -e
 # Add Desktop Icon
 cp /usr/share/applications/vivaldi-stable.desktop $HOME/Desktop/
 chown 1000:1000 $HOME/Desktop/vivaldi-stable.desktop
-chmod +x $HOME/Desktop/vivaldi-stable.desktop
 
 # Use wrapper to launch application
 mv /opt/vivaldi/vivaldi /opt/vivaldi/vivaldi-orig
@@ -52,13 +51,8 @@ cat >>/etc/opt/chrome/policies/managed/default_managed_policy.json <<EOL
 EOL
 
 # Cleanup
-if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
+apt-get autoclean
+rm -rf \
     /var/lib/apt/lists/* \
-    /var/tmp/*
-fi
-
-# Cleanup for app layer
-chown -R 1000:0 $HOME
-find /usr/share/ -name "icon-theme.cache" -exec rm -f {} \;
+    /var/tmp/* \
+    /tmp/*

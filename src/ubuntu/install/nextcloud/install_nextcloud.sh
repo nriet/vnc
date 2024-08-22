@@ -2,34 +2,18 @@
 set -ex
 if [[ "${DISTRO}" == @(oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8) ]]; then
   dnf install -y nextcloud-client
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    dnf clean all
-  fi
+  dnf clean all
 elif [ "${DISTRO}" == "opensuse" ]; then
   zypper install -yn nextcloud-desktop
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    zypper clean --all
-  fi
+  zypper clean --all
 elif grep -q "ID=debian" /etc/os-release; then
   apt-get update
   apt-get install -y nextcloud-desktop
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    apt-get autoclean
-    rm -rf \
-      /var/lib/apt/lists/* \
-      /var/tmp/*
-  fi
 else
   apt-get install -y software-properties-common
   add-apt-repository -y ppa:nextcloud-devs/client
   apt update
   apt install -y nextcloud-client
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    apt-get autoclean
-    rm -rf \
-      /var/lib/apt/lists/* \
-      /var/tmp/*
-  fi
 fi
 
 cat >$HOME/Desktop/nextcloud.desktop  <<EOL

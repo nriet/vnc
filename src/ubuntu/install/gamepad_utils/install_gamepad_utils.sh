@@ -12,9 +12,6 @@ if [ "${ARCH}" == "amd64" ] ; then
     rm /tmp/gamepadtool.deb
 fi
 
-if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
-fi
+
+apt-get autoclean
+rm -rf /var/lib/apt/lists/* 

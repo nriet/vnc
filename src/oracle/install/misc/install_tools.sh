@@ -3,12 +3,8 @@ set -ex
 
 if [ -f /usr/bin/dnf ]; then
   dnf install -y nano zip wget xdotool
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    dnf clean all
-  fi
+  dnf clean all
 else
   yum install -y nano zip wget xdotool
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    yum clean all
-  fi
+  yum clean all
 fi

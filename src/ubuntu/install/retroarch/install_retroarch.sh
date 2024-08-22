@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
 set -ex
-
-# Install Retroarch
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 add-apt-repository -y ppa:libretro/stable
 apt-get update
-apt-get install -y retroarch unzip
-
-# Deskto icon
+apt-get install -y retroarch
 cp /usr/share/applications/retroarch.desktop $HOME/Desktop/
 chmod +x $HOME/Desktop/retroarch.desktop
 
-# Assets install
 mkdir -p $HOME/.config/retroarch/{assets,cores}
 cp $SCRIPT_PATH/retroarch.cfg $HOME/.config/retroarch/retroarch.cfg
 echo "Downloading Assets"
@@ -43,13 +38,8 @@ EOL
 chmod +x /usr/bin/desktop_ready
 
 # Cleanup
-if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
+apt-get autoclean
+rm -rf \
     /var/lib/apt/lists/* \
-    /var/tmp/*
-fi
-
-# Cleanup for app layer
-chown -R 1000:0 $HOME
-find /usr/share/ -name "icon-theme.cache" -exec rm -f {} \;
+    /var/tmp/* \
+    /tmp/*

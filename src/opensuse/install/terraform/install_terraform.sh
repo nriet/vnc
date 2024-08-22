@@ -6,7 +6,5 @@ zypper install -yn \
   terraform-provider-aws \
   terraform-provider-azurerm \
   terraform-provider-google \
-  terraform-provider-kubernetes
-if [ -z ${SKIP_CLEAN+x} ]; then
-  zypper clean --all
-fi
+  terraform-provider-kubernetes 
+zypper clean --all

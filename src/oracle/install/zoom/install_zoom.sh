@@ -8,16 +8,12 @@ fi
 
 
 wget -q https://zoom.us/client/latest/zoom_$(arch).rpm
-if [[ "${DISTRO}" == @(oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|fedora37|fedora38|fedora39|fedora40) ]]; then
+if [[ "${DISTRO}" == @(oracle8|rockylinux9|rockylinux8|oracle9|almalinux9|almalinux8|fedora37) ]]; then
   dnf localinstall -y zoom_$(arch).rpm
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    dnf clean all
-  fi
+  dnf clean all
 else
   yum localinstall -y zoom_$(arch).rpm
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    yum clean all
-  fi
+  yum clean all
 fi
 rm zoom_$(arch).rpm
 sed -i 's,/usr/bin/zoom,/usr/bin/zoom --no-sandbox,g' /usr/share/applications/Zoom.desktop

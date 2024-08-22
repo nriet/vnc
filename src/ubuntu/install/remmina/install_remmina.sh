@@ -1,49 +1,29 @@
 #!/usr/bin/env bash
 set -ex
 
-if [[ "${DISTRO}" == @(centos|oracle7|oracle8|oracle9|rockylinux9|rockylinux8|almalinux9|almalinux8|fedora37|fedora38|fedora39|fedora40) ]]; then
+if [[ "${DISTRO}" == @(centos|oracle7|oracle8|oracle9|rockylinux9|rockylinux8|almalinux9|almalinux8|fedora37) ]]; then
   if [[ "${DISTRO}" == @(oracle8|rockylinux8|almalinux8) ]]; then
     dnf install -y remmina remmina-plugins-rdp remmina-plugins-secret remmina-plugins-spice xdotool
-    if [ -z ${SKIP_CLEAN+x} ]; then
-      dnf clean all
-    fi
-  elif [[ "${DISTRO}" == @(rockylinux9|oracle9|almalinux9|fedora37|fedora38|fedora39|fedora40) ]]; then
+    dnf clean all
+  elif [[ "${DISTRO}" == @(rockylinux9|oracle9|almalinux9|fedora37) ]]; then
     dnf install -y remmina remmina-plugins-rdp remmina-plugins-secret xdotool
-    if [ -z ${SKIP_CLEAN+x} ]; then
-      dnf clean all
-    fi
+    dnf clean all
   else
     yum install -y remmina remmina-plugins-rdp remmina-plugins-secret remmina-plugins-spice xdotool
-    if [ -z ${SKIP_CLEAN+x} ]; then
-      yum clean all
-    fi
+    yum clean all
   fi
 elif [ "${DISTRO}" == "opensuse" ]; then
   zypper install -yn remmina remmina-plugin-rdp remmina-plugin-secret remmina-plugin-spice xdotool
-  if [ -z ${SKIP_CLEAN+x} ]; then
-    zypper clean --all
-  fi
-elif grep -q "ID=debian" /etc/os-release || grep -q "VERSION_CODENAME=noble" /etc/os-release; then
+  zypper clean --all
+elif grep -q "ID=debian" /etc/os-release; then
   apt-get update
-  apt-get install -y remmina remmina-plugin-rdp remmina-plugin-secret xdotool
-  if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
-  fi
+  apt-get install -y remmina remmina-plugin-rdp remmina-plugin-secret remmina-plugin-spice xdotool
 else
   apt-get update
   apt-get install -y software-properties-common
   apt-add-repository -y ppa:remmina-ppa-team/remmina-next
   apt-get update
   apt-get install -y remmina remmina-plugin-rdp remmina-plugin-secret remmina-plugin-spice xdotool
-  if [ -z ${SKIP_CLEAN+x} ]; then
-  apt-get autoclean
-  rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
-  fi
 fi
 cp /usr/share/applications/org.remmina.Remmina.desktop $HOME/Desktop/
 chmod +x $HOME/Desktop/org.remmina.Remmina.desktop
@@ -181,7 +161,4 @@ shareparallel=0
 viewmode=4
 EOF
 
-# Cleanup for app layer
-chown -R 1000:0 $HOME
-find /usr/share/ -name "icon-theme.cache" -exec rm -f {} \;
 chown -R 1000:1000 $DEFAULT_PROFILE_DIR
