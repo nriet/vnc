@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#修改用户名称
-usermod -l nriet kasm-user
-sed -i 's/kasm-user/nriet/g' /etc/passwd
-sed -i 's/kasm-user/nriet/g' /etc/shadow
-mv /home/kasm-user /home/nriet
-
 IDEA_VER_DATE="2023.3.3"
 
 ARCH=$(arch | sed 's/aarch64/arm64/g' | sed 's/x86_64/amd64/g')
@@ -15,17 +9,18 @@ fi
  echo $IDEA_VER_DATE
 
 cd /tmp
-wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER_DATE}.tar.gz"
 
-tar -xzf idea.tar.gz -C /tmp
+# wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER_DATE}.tar.gz"
+# tar -xzf idea.tar.gz -C /opt
+# mv /opt/idea-* /opt/idea
 
-mv /tmp/idea-* /home/nriet/idea
-
-cp $INST_SCRIPTS/idea/idea.desktop /home/nriet/Desktop/
+cp $INST_SCRIPTS/idea/idea.desktop $HOME/Desktop/
 cp $INST_SCRIPTS/idea/idea.desktop /usr/share/applications/
 
-mv $INST_SCRIPTS/idea/jetbra /home/nriet/jetbra
+cp $INST_SCRIPTS/idea/jetbra $HOME
 
-chmod +x /home/nriet/jetbra/scripts/*.sh
+chmod +x $HOME/jetbra/scripts/*.sh
 
-rm -rf /tmp/idea.tar.gz
+# ./opt/jetbra/scripts/install.sh
+
+#rm -rf /tmp/idea.tar.gz
