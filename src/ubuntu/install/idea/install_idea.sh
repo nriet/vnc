@@ -19,13 +19,13 @@ wget -q -O idea.tar.gz "https://download.jetbrains.com.cn/idea/ideaIU-${IDEA_VER
 
 tar -xzf idea.tar.gz -C /tmp
 
-mv /tmp/idea-* $HOME/idea
+mv /tmp/idea-* /home/nriet/idea
 
-cp $INST_SCRIPTS/idea/idea.desktop $HOME/Desktop/
+cp $INST_SCRIPTS/idea/idea.desktop /home/nriet/Desktop/
 cp $INST_SCRIPTS/idea/idea.desktop /usr/share/applications/
 
-mv $INST_SCRIPTS/idea/jetbra $HOME/jetbra
+mv $INST_SCRIPTS/idea/jetbra /home/nriet/jetbra
 
-chmod +x $HOME/jetbra/scripts/*.sh
+chmod +x /home/nriet/jetbra/scripts/*.sh
 
 rm -rf /tmp/idea.tar.gz
