@@ -37,13 +37,13 @@ function get_set_creds() {
   CREDENTIALS=$(zenity --forms --title="VPN credentials" --text="Enter your VPN auth credentials" --add-entry="Username" --add-password="Password" --separator ",,,,,,")
   USER=$(awk -F',,,,,,' '{print $1}' <<<$CREDENTIALS)
   PASS=$(awk -F',,,,,,' '{print $2}' <<<$CREDENTIALS)
-  echo ${USER} > /home/kasm-user/vpn_credentials
-  echo ${PASS} >> /home/kasm-user/vpn_credentials
-  chown kasm-user:kasm-user /home/kasm-user/vpn_credentials
-  cp ${VPN_CONFIG} /home/kasm-user/vpn.ovpn
-  chown kasm-user:kasm-user /home/kasm-user/vpn.ovpn
-  sed -i "s#auth-user-pass#auth-user-pass /home/kasm-user/vpn_credentials#g" /home/kasm-user/vpn.ovpn
-  VPN_CONFIG=/home/kasm-user/vpn.ovpn
+  echo ${USER} > /home/nriet/vpn_credentials
+  echo ${PASS} >> /home/nriet/vpn_credentials
+  chown nriet:nriet /home/nriet/vpn_credentials
+  cp ${VPN_CONFIG} /home/nriet/vpn.ovpn
+  chown nriet:nriet /home/nriet/vpn.ovpn
+  sed -i "s#auth-user-pass#auth-user-pass /home/nriet/vpn_credentials#g" /home/nriet/vpn.ovpn
+  VPN_CONFIG=/home/nriet/vpn.ovpn
 }
 
 function tailscale_status() {

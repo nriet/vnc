@@ -51,8 +51,8 @@ COMPOSE_OS=$(uname -s)
 curl -L https://github.com/docker/compose/releases/download/${COMPOSE_RELEASE}/docker-compose-${COMPOSE_OS,,}-$(uname -m) -o /usr/local/lib/docker/cli-plugins/docker-compose
 chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
-echo 'kasm-user:kasm-user' | chpasswd
-echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+echo 'nriet:nriet' | chpasswd
+echo 'nriet ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 groupadd docker
-adduser kasm-user docker
+adduser nriet docker
