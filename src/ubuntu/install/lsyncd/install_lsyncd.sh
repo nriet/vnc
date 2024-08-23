@@ -24,7 +24,7 @@ settings {
 
 sync {
         default.rsync,
-        source="/home/nriet/",
+        source="/home/kasm-user/",
         target="/kasm_profile_sync",
         delay = 0,
         rsync={

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-usermod -l nriet kasm-user
-sed -i 's/kasm-user/nriet/g' /etc/passwd
-sed -i 's/kasm-user/nriet/g' /etc/shadow
+# usermod -l kasm-user kasm-user
+# sed -i 's/kasm-user/kasm-user/g' /etc/passwd
+# sed -i 's/kasm-user/kasm-user/g' /etc/shadow
 
 IDEA_VER_DATE="2023.3.3"
 

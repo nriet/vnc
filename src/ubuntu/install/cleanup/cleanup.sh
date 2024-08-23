@@ -16,7 +16,7 @@ fi
 # File cleanups
 rm -Rf \
   /home/kasm-default-profile/.cache \
-  /home/nriet/.cache \
+  /home/kasm-user/.cache \
   /tmp \
   /var/lib/apt/lists/* \
   /var/tmp/*
