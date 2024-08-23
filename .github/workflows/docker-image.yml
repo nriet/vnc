@@ -39,6 +39,7 @@ jobs:
         with:
           file: dockerfile-kasm-java-dev
           platforms: |
+            linux/amd64
             linux/arm64
           push: true
           tags: |
