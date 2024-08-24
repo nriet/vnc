@@ -3,7 +3,7 @@ name: Publish Docker image   # workflow名称，可以在Github项目主页的�
 env:
   APP_NAME: java-dev
   DOCKERHUB_REPO: nriet/java-dev
-  APP_VERSION: 1.15.0-rolling
+  APP_VERSION: 1.13.1-rolling
   ALIYUN_REGISTRY: "registry.cn-hangzhou.aliyuncs.com"
   ALIYUN_NAME_SPACE: "nriet"
   ALIYUN_REGISTRY_USER: "${{ secrets.ALIYUN_REGISTRY_USER }}"
