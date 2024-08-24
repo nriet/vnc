@@ -1,4 +1,4 @@
-ARG BASE_TAG="1.13.1-rolling"
+ARG BASE_TAG="1.15.0-rolling"
 ARG BASE_IMAGE="core-ubuntu-jammy"
 FROM kasmweb/$BASE_IMAGE:$BASE_TAG
 
@@ -32,12 +32,12 @@ COPY ./src/ubuntu/install/firefox/firefox.desktop $HOME/Desktop/
 RUN bash $INST_SCRIPTS/firefox/install_firefox.sh && rm -rf $INST_SCRIPTS/firefox/
 
 ### Install Sublime Text
-COPY ./src/ubuntu/install/sublime_text $INST_SCRIPTS/sublime_text/
-RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCRIPTS/sublime_text/
+# COPY ./src/ubuntu/install/sublime_text $INST_SCRIPTS/sublime_text/
+# RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCRIPTS/sublime_text/
 
 ### Install Visual Studio Code
-# COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
-# RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh  && rm -rf $INST_SCRIPTS/vs_code/
+COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
+RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh  && rm -rf $INST_SCRIPTS/vs_code/
 
 ### Install Remmina
 # COPY ./src/ubuntu/install/remmina $INST_SCRIPTS/remmina/
