@@ -22,9 +22,13 @@ mv /opt/idea-* /opt/idea
 
 cp $INST_SCRIPTS/idea/idea.desktop /usr/share/applications/
 
-cp -r $INST_SCRIPTS/idea/jetbra/ $HOME/
+cp -r $INST_SCRIPTS/idea/jetbra/ /opt/
 
-chmod +x $HOME/jetbra/scripts/*.sh
+cp -r $INST_SCRIPTS/idea/idea.sh /opt/idea/bin/idea.sh
+
+chmod +x /opt/idea/bin/idea.sh
+
+chmod +x /opt/jetbra/scripts/*.sh
 
 # ./opt/jetbra/scripts/install.sh
 
