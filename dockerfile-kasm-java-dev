@@ -50,6 +50,11 @@ RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCR
 ### Install Java
 RUN apt-get update && apt-get install -y default-jdk default-jre
 
+# Install Idea
+COPY ./src/ubuntu/install/idea/ $INST_SCRIPTS/idea/
+COPY ./src/ubuntu/install/idea/idea.desktop $HOME/Desktop/
+RUN bash $INST_SCRIPTS/idea/install_idea.sh && rm -rf $INST_SCRIPTS/idea/
+
 ### Install Eclipse
 # COPY ./src/ubuntu/install/eclipse $INST_SCRIPTS/eclipse
 # RUN bash $INST_SCRIPTS/eclipse/install_eclipse.sh && rm -rf $INST_SCRIPTS/eclipse/
